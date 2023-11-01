@@ -29,11 +29,12 @@ import java.util.List;
 
 public class TimeTask extends AppCompatActivity {
     public Boolean[] status = new Boolean[]{false, false, false, false}; //medias,phone,whatsapp,apps
-    public ArrayList<String> FTP_path = new ArrayList<String>();
+    public static ArrayList<String> FTP_path = new ArrayList<String>();
+    public static SharedPreferences prefs;
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         for(int i = 0; i<4; i++)
         {
             status[i] = prefs.getBoolean(String.format("%s", i), false);
@@ -82,6 +83,7 @@ public class TimeTask extends AppCompatActivity {
 
     public static void DoBackup(Context ctx, Boolean[] status, Calendar lastUpload) {
         System.out.println("Start backup sequence");
+        prefs = PreferenceManager.getDefaultSharedPreferences(ctx);
 //        createNotificationChannel(ctx);
 //        NotificationCompat.Builder mBuilder =   new NotificationCompat.Builder(ctx, "channel_backup")
 //                .setSmallIcon(R.drawable.ic_launcher_foreground)
@@ -143,9 +145,28 @@ public class TimeTask extends AppCompatActivity {
                 }
             }
         }
+        String ip = prefs.getString("IP", "localhost");
+        String user = prefs.getString("USER", "user");
+        String pass = prefs.getString("PASS", "pass");
+        int port = 21;
+        if(ip.contains(":"))
+        {
+            String tmp = ip.split(":")[1];
+            if(tmp.length()>0)
+            {
+                try{
+                    port = Integer.parseInt(tmp);
+                }
+                catch (Exception ignored)
+                {
+                }
+            }
+        }
+        UploadFileList(files, user, 0, ip, port, user, pass);
         for (File f:
              files) {
             System.out.println(f.getName());
+            
         }
         System.out.println(prefix);
         Calendar cur_cala = new GregorianCalendar();
@@ -171,24 +192,26 @@ public class TimeTask extends AppCompatActivity {
             return new ArrayList<File>(Arrays.asList(files));
         return new ArrayList<File>();
     }
-    private Boolean UploadFileList(String[] files_paths, String prefix, int index)
+    private static Boolean UploadFileList(ArrayList<File> files_paths, String prefix, int index, String ip, int port, String user, String pass)
     {
-        FTPClient con = null;
+        FTPClient con;
 
         try
         {
             con = new FTPClient();
-            con.connect("192.168.1.95");
+            con.connect(ip, port);
 
-            if (con.login("Administrator", "KUjWbk"))
+            if (con.login(user, pass))
             {
                 con.enterLocalPassiveMode(); // important!
                 con.setFileType(FTP.BINARY_FILE_TYPE);
-                for (String file_path: files_paths
+                for (File local_file: files_paths
                      ) {
 
-                    FileInputStream in = new FileInputStream(file_path);
-                    boolean result = con.storeFile(prefix+file_path.split("/")[file_path.split("/").length-1], in);
+                    FileInputStream in = new FileInputStream(local_file);
+                    boolean result = con.storeFile(prefix+"/"+FTP_path.get(index)+
+                            local_file.getAbsolutePath().split("/")
+                                    [local_file.getAbsolutePath().split("/").length-1], in);
                     in.close();
                     if (result) Log.v("upload result", "succeeded");
                 }

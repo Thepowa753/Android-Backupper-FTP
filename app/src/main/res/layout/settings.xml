@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#384745">
+
+    <LinearLayout
+        android:id="@+id/VerTop"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="32dp"
+        android:orientation="vertical"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="674dp"
+            android:background="#384745"
+            android:orientation="vertical">
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="15dp" />
+
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="IP:port"
+                android:textAlignment="center"
+                android:textColor="#FFFFFF" />
+
+            <EditText
+                android:id="@+id/ip"
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:background="@drawable/border"
+                android:ems="10"
+                android:inputType="text"
+                android:textAlignment="center"
+                android:textColor="#FFFFFF" />
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Username"
+                android:textAlignment="center"
+                android:textColor="#FFFFFF" />
+
+            <EditText
+                android:id="@+id/user"
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:background="@drawable/border"
+                android:ems="10"
+                android:inputType="text"
+                android:textAlignment="center"
+                android:textColor="#FFFFFF" />
+
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Password"
+                android:textAlignment="center"
+                android:textColor="#FFFFFF" />
+
+            <EditText
+                android:id="@+id/pass"
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:background="@drawable/border"
+                android:ems="10"
+                android:inputType="text"
+                android:textAlignment="center"
+                android:textColor="#FFFFFF" />
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="10dp" />
+
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+            </ScrollView>
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:onClick="onBackPressed" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/HorMid"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toTopOf="@+id/HorBott">
+
+        <Space
+            android:layout_width="299dp"
+            android:layout_height="26dp"
+            android:layout_weight="1" />
+
+        <Button
+            android:id="@+id/button3"
+            android:layout_width="1dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="+" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/HorBott"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <Button
+            android:id="@+id/back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:onClick="onBackBTNPressed"
+            android:text="Indietro" />
+
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+
+        <Button
+            android:id="@+id/save"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:onClick="onSaveBtnPressed"
+            android:text="Salva" />
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

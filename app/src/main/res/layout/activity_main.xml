@@ -7,6 +7,20 @@
     android:background="#004242"
     tools:context=".MainActivity">
 
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/settingsBTN"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="#556677"
+        android:clickable="true"
+        android:onClick="onSettingsClicked"
+        android:src="@android:drawable/ic_menu_manage"
+        android:translationX="3dp"
+        android:translationY="3dp"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="3dp"
+        tools:layout_editor_absoluteY="3dp" />
+
     <LinearLayout
         android:id="@+id/hor"
         android:layout_width="match_parent"
@@ -32,7 +46,7 @@
 
                 <Space
                     android:layout_width="match_parent"
-                    android:layout_height="30dp" />
+                    android:layout_height="75dp" />
 
                 <Switch
                     android:id="@+id/medias"

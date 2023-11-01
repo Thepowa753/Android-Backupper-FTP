@@ -4,6 +4,7 @@ import static android.os.Environment.getExternalStoragePublicDirectory;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
@@ -46,6 +47,11 @@ public class MainActivity extends AppCompatActivity {
             SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy - HH:mm");
             ((TextView) findViewById(R.id.editTextDate)).setText(format.format(cur_cal.getTime()));
         }
+    }
+
+    public void onSettingsClicked(View v){
+        Intent intent = new Intent(getApplicationContext(), settings.class);
+        startActivity(intent);
     }
 
     public void onClickBackup(View v)
